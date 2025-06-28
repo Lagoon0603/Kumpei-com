@@ -12,6 +12,7 @@ export default function Header() {
           <Link href="/profile" className="hover:text-blue-600">Profile</Link>
           {/* <Link href="/blog" className="hover:text-blue-600">Blog</Link> */}
           {/* <Link href="/works" className="hover:text-blue-600">Works</Link> */}
+          <Link href="/links" className="hover:text-blue-600">Links</Link>
         </nav>
       </div>
     </header>
