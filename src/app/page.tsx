@@ -1,28 +1,21 @@
-export default function Home() {
+import type { Metadata } from 'next';
+
+// ページのタイトルや説明文を設定します (SEO対策)
+export const metadata: Metadata = {
+  title: 'SNSリンク集 - Kumpei.com',
+  description: '関連リンクやサイトの一覧です。',
+};
+
+export default function LinksPage() {
   return (
-    // <main>タグで囲むのが一般的です
     <main className="container mx-auto p-8">
-      
-      {/* ページタイトル */}
-      <div className="text-center my-12">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Welcome to Kumpei.com
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">
-          Next.jsとVercelで構築した、私の公式サイトです。
-        </p>
-      </div>
-
-      {/* 自己紹介セクション */}
-      <div className="bg-slate-100 p-8 rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">About Me</h2>
-        <p>
-          こんにちは、Kumpeiです。このサイトでは、私の活動や考え、
-          学んだことなどを発信していきます。
-          どうぞごゆっくりご覧ください。
-        </p>
-      </div>
-
+      <h1 className="text-3xl font-bold mb-8 text-center">
+        リンク集
+      </h1>
+      {
+        "Instagram: https://www.instagram.com/lagoon0603/profilecard/?igsh=YnprYXQzcDRhemR4"
+        "Facebook: https://www.facebook.com/profile.php?id=61577213146535"
+      }
     </main>
   );
 }
