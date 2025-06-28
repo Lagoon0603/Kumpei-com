@@ -4,16 +4,17 @@ import { useState } from 'react'; // ← useStateをインポート
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
   return (
-    <header className="bg-sky-300/40 shadow-md">
+    <header className="bg-sky-300/40 shadow-md relative">
       <div className="container mx-auto flex justify-between items-center p-4">
-
         <Link href="/" className="text-2xl font-bold text-gray-800">
           Kumpei Official Site
         </Link>
-
         {/* PC用のナビゲーション (mdスクリーン以上で表示) */}
-        <nav className="flex gap-6 text-gray-600">
+        <nav className="hidden md:flex gap-6 text-gray-600"></nav>
           <Link href="/" className="hover:text-blue-600">HOME</Link>
           <Link href="/profile" className="hover:text-blue-600">PROFILE</Link>
           {/* <Link href="/blog" className="hover:text-blue-600">Blog</Link> */}
@@ -32,15 +33,15 @@ export default function Header() {
           </button>
         </div>
       </div>
-      
+
       {/* モバイル用メニュー (isOpenがtrueの時だけ表示) */}
       {isOpen && (
-        <nav className="md:hidden absolute top-full left-0 w-full bg-white shadow-md">
+        <nav className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-10">
           <ul className="flex flex-col items-center">
-            <li><Link href="/" className="block py-4 hover:bg-gray-100 w-full text-center">HOME</Link></li>
-            <li><Link href="/profile" className="block py-4 hover:bg-gray-100 w-full text-center">PROFILE</Link></li>
-            <li><Link href="/links" className="block py-4 hover:bg-gray-100 w-full text-center">NEWS</Link></li>
-            <li><Link href="/links" className="block py-4 hover:bg-gray-100 w-full text-center">LINKS</Link></li>
+            <li><Link href="/" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">HOME</Link></li>
+            <li><Link href="/profile" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">PROFILE</Link></li>
+            <li><Link href="/news" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">NEWS</Link></li>
+            <li><Link href="/links" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">LINKS</Link></li>
           </ul>
         </nav>
       )}
