@@ -11,22 +11,16 @@ const socialLinks = [
   {
     id: 1,
     name: 'Instagram',
-    url: 'https://www.instagram.com/lagoon0603/', // 短縮されたURLにしました
+    url: 'https://www.instagram.com/lagoon0603/',
     username: '@lagoon0603',
   },
   {
     id: 2,
     name: 'Facebook',
     url: 'https://www.facebook.com/profile.php?id=61577213146535',
-    username: 'Kumpei on Facebook', // Facebook用の表示名
+    username: 'Kumpei on Facebook',
   },
-  // 他にもリンクがあれば、ここに同じ形式で追加できます
-  // {
-  //   id: 3,
-  //   name: 'X (旧Twitter)',
-  //   url: 'https://twitter.com/your_account',
-  //   username: '@your_account',
-  // },
+  // 他にもリンクがあれば、ここに追加できます
 ];
 
 export default function LinksPage() {
@@ -43,8 +37,8 @@ export default function LinksPage() {
             <li key={link.id}>
               <a
                 href={link.url}
-                target="_blank" // 新しいタブで開く
-                rel="noopener noreferrer" // セキュリティ対策
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block border p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
               >
                 <span className="text-xl font-semibold">{link.name}</span>
