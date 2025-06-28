@@ -10,15 +10,27 @@ export const metadata: Metadata = {
 const socialLinks = [
   {
     id: 1,
-    name: 'Instagram',
+    name: 'Instagram(個人用)',
     url: 'https://www.instagram.com/lagoon0603/',
     username: '@lagoon0603',
   },
   {
     id: 2,
+    name: 'Instagram(飛行機写真専用)',
+    url: 'https://www.instagram.com/lagoon_air/',
+    username: '@lagoon_air',
+  },
+  {
+    id: 3,
     name: 'Facebook',
     url: 'https://www.facebook.com/profile.php?id=61577213146535',
     username: 'Kumpei on Facebook',
+  },
+  {
+    id: 4,
+    name: 'X(旧Twitter)',
+    url: 'https://x.com/lagoon_air/',
+    username: '@lagoon_air',
   },
   // 他にもリンクがあれば、ここに追加できます
 ];

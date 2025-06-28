@@ -6,7 +6,7 @@ export default function Home() {
       {/* ページタイトル */}
       <div className="text-center my-12">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Welcome to Kumpei.com
+          Kumpei.comへようこそ！
         </h1>
         <p className="mt-4 text-lg text-gray-600">
           Next.jsとVercelで構築した、私の公式サイトです。
@@ -15,10 +15,9 @@ export default function Home() {
 
       {/* 自己紹介セクション */}
       <div className="bg-slate-100 p-8 rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">About Me</h2>
+        <h2 className="text-2xl font-bold mb-4">サイトについて</h2>
         <p>
-          こんにちは、Kumpeiです。このサイトでは、私の活動や考え、
-          学んだことなどを発信していきます。
+          こんにちは、土井薫平です。このサイトでは、私についての様々なことを発信しております。
           どうぞごゆっくりご覧ください。
         </p>
       </div>
