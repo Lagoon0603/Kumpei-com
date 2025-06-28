@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 // サイトのメタ情報を設定
 export const metadata: Metadata = {
-  title: "Kumpei.com - くむぺい公式サイト",
-  description: "Next.jsで構築された、くむぺいの公式サイトです。",
+  title: "Kumpei.com - くんぺい公式サイト",
+  description: "Next.jsで構築された、くんぺいの公式サイトです。",
 };
 
 export default function RootLayout({
