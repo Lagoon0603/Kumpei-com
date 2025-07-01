@@ -14,13 +14,14 @@ export default function Header() {
           Kumpei Official Site
         </Link>
         {/* PC用のナビゲーション (mdスクリーン以上で表示) */}
-        <nav className="hidden md:flex gap-6 text-gray-600"></nav>
+        <nav className="hidden md:flex gap-6 text-gray-600">
           <Link href="/" className="hover:text-blue-600">HOME</Link>
           <Link href="/profile" className="hover:text-blue-600">PROFILE</Link>
           {/* <Link href="/blog" className="hover:text-blue-600">Blog</Link> */}
           {/* <Link href="/works" className="hover:text-blue-600">Works</Link> */}
           <Link href="/news" className="hover:text-blue-600">NEWS</Link>
           <Link href="/links" className="hover:text-blue-600">LINKS</Link>
+          <Link href="/contact" className="hover:text-blue-600">CONTACT</Link>
         </nav>
 
         {/* スマホ用のハンバーガーボタン (mdスクリーン未満で表示) */}
@@ -42,6 +43,7 @@ export default function Header() {
             <li><Link href="/profile" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">PROFILE</Link></li>
             <li><Link href="/news" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">NEWS</Link></li>
             <li><Link href="/links" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">LINKS</Link></li>
+            <li><Link href="/contact" onClick={closeMenu} className="block py-4 hover:bg-gray-100 w-full text-center">CONTACT</Link></li>
           </ul>
         </nav>
       )}

@@ -32,10 +32,43 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env*.local
 
 # vercel
 .vercel
+/.vercel/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local env files
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+/coverage
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# VS Code editor settings
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# VS Code editor settings folder
+.vscode/
+
+# Temporary files and archives
+*.tmp
+*.zip
+*.rar
+*.gz

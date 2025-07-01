@@ -11,6 +11,7 @@ export default function Footer() {
           <Link href="/profile" className="hover:underline">PROFILE</Link>
           <Link href="/news" className="hover:underline">NEWS</Link>
           <Link href="/links" className="hover:underline">LINKS</Link>
+          <Link href="/contact" className="hover:underline">CONTACT</Link>
         </nav>
         <p>&copy; {currentYear} Kumpei.com. All Rights Reserved.</p>
       </div>
