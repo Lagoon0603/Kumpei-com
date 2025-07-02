@@ -14,6 +14,12 @@ export default function NEWS() {
                 本サイトを開設いたしました。
                 </p>
         </div>
+        <div className="bg-slate-100 p-8 rounded-lg">
+                <h2 className="text-2xl font-bold mb-4">2025.07.02</h2>
+                <p>
+                CONTACTページを追加しました。お気軽にお問い合わせください！
+                </p>
+        </div>
         {/* ここに更新情報などを追加していく */}     
       </div>
     </main>
