@@ -1,61 +1,59 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// ★修正点1: 定数名をより明確にし、コンポーネントの外で定義する
+// 環境変数はPOST関数の外で一度だけ読み込むのが効率的
 const resendApiKey = process.env.RESEND_API_KEY;
-const toEmailAddress = process.env.CONTACT_EMAIL;
+const toEmailAddress = process.env.CONTACT_FORM_TO_EMAIL; // 受信先アドレス
 
-// 環境変数が読み込まれているか、起動時に一度だけ確認
-if (!process.env.RESEND_API_KEY) {
-  console.error('Error: RESEND_API_KEY is not set in environment variables.');
-}
-if (!toEmailAddress) {
-  console.error('Error: CONTACT_EMAIL is not set in environment variables.');
-}
 const resend = new Resend(resendApiKey);
 
 export async function POST(request: Request) {
-  // ★修正点2: POSTリクエストの最初に、改めて環境変数の存在をチェックする
+  // ★修正点1: 関数の先頭で環境変数が存在するかをチェックする
   if (!resendApiKey || !toEmailAddress) {
-    // 環境変数がなければ、サーバー内部のエラーとして500を返す
-    return NextResponse.json(
-      { message: 'サーバーの設定エラーです。管理者に連絡してください。' },
-      { status: 500 }
-    );
+    console.error('Error: Missing environment variables for Resend.');
+    return NextResponse.json({ message: 'サーバー側の設定エラーです。' }, { status: 500 });
   }
+
   try {
-    const body = await request.json();
-    const { name, email, message } = body;
+    const formData = await request.formData();
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string; // これはユーザーが入力したアドレス
+    const message = formData.get('message') as string;
+    const attachmentFile = formData.get('attachment') as File | null;
 
-    // デバッグ用: 受け取ったデータを確認
-    console.log('Received data:', { name, email, message });
-
-    // バリデーション: 必要なデータが揃っているか確認
     if (!name || !email || !message) {
       return NextResponse.json({ message: '必須項目が不足しています。' }, { status: 400 });
     }
-    
-    // Resendでメールを送信
-    const data = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Resendのテスト用送信元アドレス
-      to: [toEmailAddress!], // 環境変数から取得したメールアドレス
-      subject: `【kumpei.com】お問い合わせがありました`,
-      replyTo: [email], // ユーザーのメールアドレスを返信先に設定
-      html: `<p><strong>お名前:</strong> ${name}</p>
-             <p><strong>メールアドレス:</strong> ${email}</p>
-             <p><strong>お問い合わせ内容:</strong><br>${message.replace(/\n/g, '<br>')}</p>`, // 改行を<br>に変換
-    });
 
-    // デバッグ用: Resendからの応答を確認
-    console.log('Resend response:', data);
+    const attachments = [];
+    if (attachmentFile && attachmentFile.size > 0) {
+      const buffer = Buffer.from(await attachmentFile.arrayBuffer());
+      attachments.push({
+        filename: attachmentFile.name,
+        content: buffer,
+      });
+    }
+
+    // ★修正点2: toプロパティには、関数の外で定義した`toEmailAddress`を正しく使う
+    const data = await resend.emails.send({
+      from: 'お問い合わせフォーム <onboarding@resend.dev>',
+      to: toEmailAddress, // ← ここを修正
+      subject: `【kumpei.com】お問い合わせがありました`,
+      replyTo: email,
+      html: `
+        <h1>お問い合わせがありました</h1>
+        <p><strong>お名前:</strong> ${name}</p>
+        <p><strong>メールアドレス:</strong> ${email}</p>
+        <p><strong>お問い合わせ内容:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+      attachments: attachments,
+    });
 
     return NextResponse.json({ message: 'メールの送信に成功しました。', data });
 
   } catch (error) {
-    // デバッグ用: エラー内容をコンソールに出力
-    console.error('Error in /api/contact:', error);
-    
-    // エラー発生時は、より詳細なエラーメッセージと500ステータスを返す
+    console.error(error);
     return NextResponse.json({ message: 'メールの送信中にエラーが発生しました。', error: (error as Error).message }, { status: 500 });
   }
 }

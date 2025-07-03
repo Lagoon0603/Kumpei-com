@@ -19,10 +19,8 @@ export default function ContactPage() {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        // headersはブラウザが自動で設定するので削除する
+        body: formData, // JSON.stringifyは使わず、formDataを直接渡す
       });
 
       if (response.ok) {
@@ -47,7 +45,7 @@ export default function ContactPage() {
         <p className="text-center mb-8">
           ご意見、ご感想、お仕事のご依頼など、お気軽にご連絡ください。
         </p>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">お名前</label>
             <input
@@ -77,6 +75,17 @@ export default function ContactPage() {
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             ></textarea>
+          </div>
+          <div>
+            <label htmlFor="attachment" className="block text-sm font-medium text-gray-700">
+              添付ファイル (任意)
+            </label>
+            <input
+              type="file"
+              id="attachment"
+              name="attachment"
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
           </div>
           <div>
             <button
