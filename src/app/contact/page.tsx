@@ -10,11 +10,6 @@ export default function ContactPage() {
     setStatus('送信中...');
 
     const formData = new FormData(event.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-    };
 
     try {
       const response = await fetch('/api/contact', {
